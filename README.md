@@ -7,6 +7,7 @@
     />
   </a>
 </p>
+Moss(莫斯),让Spring Cloud应用不再流浪！
 
 ---
 
@@ -59,6 +60,12 @@ Roadmap 时间点：
 | -------- | -------- | -------- |
 | ✅1.0.0.RELEASE     | **2019.4.21** | 稳定可用版本|
 
+#### 1.2.2 Moss开发团队
+
+| 姓名 | 角色 | github地址|
+| -------- | -------- | -------- |
+|    SoftwareKing  | Owner | https://github.com/SoftwareKing|
+|   iShawnWang  | 前端开发 |https://github.com/iShawnWang |
 
 ### 1.3 Moss的功能
 
@@ -271,6 +278,36 @@ spring:
 
 -Xloggc:/opt/logs/gc.log -verbose.gc
 
+### 4.1 切换支持单Nacos
+
+将moss-service/pom.xml中的依赖修改如下
+
+```xml
+ <dependency>
+            <groupId>org.xujin.moss</groupId>
+            <artifactId>moss-adapter-multi-eureka</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+```
+修改为
+```xml
+  <dependency>
+             <groupId>org.xujin.moss</groupId>
+             <artifactId>moss-adapter-single-nacos</artifactId>
+             <version>1.0.0.RELEASE</version>
+         </dependency>
+```
+
+yml文件配置如下
+```yml
+spring:
+  application:
+    name: halo-moss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+```
 
 ## 5.致谢
 

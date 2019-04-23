@@ -1,15 +1,12 @@
 package org.xujin.moss;
 
-import com.ulisesbocchio.jasyptspringboot.encryptor.DefaultLazyEncryptor;
-import com.ulisesbocchio.jasyptspringboot.encryptor.SimplePBEStringEncryptor;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import org.jasypt.encryption.StringEncryptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +22,7 @@ import javax.servlet.Filter;
 @EnableAutoConfiguration
 @EnableAdminServer
 //@EnableScheduling
+@EnableDiscoveryClient
 @ComponentScan("org.xujin.moss.*")
 public class MossApplication {
 

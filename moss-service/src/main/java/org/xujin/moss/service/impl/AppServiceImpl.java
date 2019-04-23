@@ -48,6 +48,9 @@ public class AppServiceImpl implements AppService {
 
     private static final Log log = LogFactory.getLog(AppServiceImpl.class);
 
+    @Value("${moss.skywalking.url}")
+    private  String skyWalKing_Url;
+
     @Autowired
     private AppMapper appMapper;
 
@@ -128,12 +131,8 @@ public class AppServiceImpl implements AppService {
     @Override
     public ResultData getTraceTopology(String appName) {
         ResultData resultData = ResultData.builder().build();
-        List<MenuModel> menuModels = menuService.getMenuByKey("trace");
-        if (CollectionUtils.isEmpty(menuModels)) {
-            log.info("trace key is not exist");
-            resultData= ResultData.builder().code(200).msgCode("500").msgContent("trace key is not exist").build();
-        }
-        String traceBaseUrl = menuModels.get(0).getUrl();
+        //Skywalking的URL
+        String traceBaseUrl = skyWalKing_Url;
         //查询出SkyWalking中的所有应用信息
         List<Application> applications = findAllApplications(traceBaseUrl);
         String targetApplicationId = null;
