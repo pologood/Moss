@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: h2, @discovery.type@
+  application:
+    name: halo-moss
+  boot:
+    admin:
+      ## 兼容配置Spring Boot 1.X的端点和自定义的端点
+      probed-endpoints: 
+      - "metricsInfo"
+      - "metrics:metrics"
+      - "gc"
+      - "jardeps"
+      - "appinfo"
+      - "health"
+      - "env"
+      - "metrics"
+      - "httptrace:trace"
+      - "httptrace"
+      - "threaddump:dump"
+      - "threaddump"
+      - "jolokia"
+      - "info"
+      - "logfile"
+      - "refresh"
+      - "flyway"
+      - "liquibase"
+      - "heapdump"
+      - "loggers"
+      - "auditevents"
+      - "mappings"
+      - "scheduledtasks"
+      - "configprops"
+      - "caches"
+      - "beans"
+server:
+  port: 8086
+#management.jolokia.enabled: true
+management.endpoints.health.show-details: true
+
+### 替换成自己的skywalking URL
+moss.skywalking.url: http://localhost:8083/
+
+logging:
+  moss:
+    path: logs
+  registry:
+    files:
+    - name: info
+      description: 标准输出
+      path: logs/${spring.application.name}/info.log
+    - name: error
+      description: 标准输出
+      path: logs/${spring.application.name}/error.log
+    #- name: gclog
+    #  path: logs/${spring.application.name}/gc.log

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.actuate.info.SimpleInfoContributor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.core.env.Environment;
 import org.xujin.moss.client.endpoint.*;
 
 @Configuration
+@EnableConfigurationProperties(LogFileRegistry.class)
 public class AdminEndPointConfiguration {
 
     @Autowired
@@ -22,13 +24,8 @@ public class AdminEndPointConfiguration {
     }
 
     @Bean
-    public InfoLogFileEndPoint infoLogFileEndPoin() {
-        return new InfoLogFileEndPoint();
-    }
-
-    @Bean
-    public ErrorLogFileEndPoint errorLogFileEndPoint() {
-        return new ErrorLogFileEndPoint();
+    public LogFileEndPoint logFileEndPoint(LogFileRegistry logFileRegistry) {
+        return new LogFileEndPoint(env, logFileRegistry);
     }
 
 
@@ -57,5 +54,8 @@ public class AdminEndPointConfiguration {
     public SimpleInfoContributor springBootVersionInfoContributor() {
         return new SimpleInfoContributor("spring-boot-version", SpringBootVersion.getVersion());
     }
-
+    @Bean
+    public MetaDataProvider metaDataProvider() {
+        return new MetaDataProvider();
+    }
 }

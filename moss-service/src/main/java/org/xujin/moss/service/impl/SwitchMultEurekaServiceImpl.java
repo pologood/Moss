@@ -1,6 +1,6 @@
 package org.xujin.moss.service.impl;
 
-import de.codecentric.boot.admin.server.cloud.extension.MultRegisterCenterService;
+import org.moss.registry.adapter.MultRegisterCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xujin.moss.constant.Constants;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SwitchMultEurekaServiceImpl  implements MultRegisterCenterService {
+public class SwitchMultEurekaServiceImpl implements MultRegisterCenterService {
 
     @Autowired
     private RegisterCenterMapper registerCenterMapper;
